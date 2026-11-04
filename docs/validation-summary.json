@@ -1,0 +1,226 @@
+{
+  "schema_version": 2,
+  "verified_on": "2026-10-20",
+  "platform": "Windows x64; CPU FP32",
+  "scope": "Official RVC fairseq and main; six Applio standard v2 embedders",
+  "contract_tests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "models": [
+    {
+      "id": "rvc-fairseq-base",
+      "onnx_sha256": "d0a066300630e41819d49c414607f18259b56a0d05d682dce90a31b1378448bb",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 38,
+      "speech_comparisons": 2,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 0.00027447938919067383,
+      "observed_max_mean_abs": 1.870599044195842e-05
+    },
+    {
+      "id": "rvc-hubert-base",
+      "onnx_sha256": "63cb176bebcb6c814f23881034333faea4e366f8a63f47c279a3269b13691eb0",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 38,
+      "speech_comparisons": 2,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 0.00027447938919067383,
+      "observed_max_mean_abs": 1.870599044195842e-05
+    },
+    {
+      "id": "applio-contentvec",
+      "onnx_sha256": "911d31b42a1e111c6a2ba4162e21068589c7bf3a4515d71849512ea43a393ad7",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 0.00027447938919067383,
+      "observed_max_mean_abs": 1.870599044195842e-05
+    },
+    {
+      "id": "applio-japanese-hubert-base",
+      "onnx_sha256": "8a09962ff8b743d887fe8784687f3c340db3310662ebbd8b2c139fd0e577754b",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 0.00016868114471435547,
+      "observed_max_mean_abs": 8.141366379277315e-06
+    },
+    {
+      "id": "applio-chinese-hubert-base",
+      "onnx_sha256": "bfadb2d24fd35e329a723d476ec77a91a24931141ad99ec5fdda161ce0fe9fa9",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 0.0003941059112548828,
+      "observed_max_mean_abs": 2.3934486307553016e-05
+    },
+    {
+      "id": "applio-korean-hubert-base",
+      "onnx_sha256": "664c6341445eb95f7c39fafcd63b7e795a6f93d563d239c44e504f0006fc32a2",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 2.8848648071289062e-05,
+      "observed_max_mean_abs": 6.036026206857059e-06
+    },
+    {
+      "id": "applio-spin",
+      "onnx_sha256": "53a8cf0f523a7c073de0943bddc86346e0d677a075719211f3abac624d3ff74e",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 3.647804260253906e-05,
+      "observed_max_mean_abs": 5.9025915106758475e-06
+    },
+    {
+      "id": "applio-spin-v2",
+      "onnx_sha256": "2c4ada40695712f302520127bd5634ebed05fb3334467ebda313955e2f1d43c0",
+      "check": "pytorch-versus-onnx",
+      "passed": true,
+      "comparisons": 19,
+      "speech_comparisons": 1,
+      "environment": {
+        "torch": "2.7.1+cpu",
+        "transformers": "4.44.2",
+        "numpy": "2.5.4",
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "atol": 0.001,
+      "rtol": 0.0001,
+      "max_mean_abs": 0.0001,
+      "observed_max_abs": 4.3004751205444336e-05,
+      "observed_max_mean_abs": 7.731831829005387e-06
+    }
+  ],
+  "total_feature_comparisons": 190,
+  "fairseq_comparisons": 95,
+  "fairseq_evidence": [
+    {
+      "id": "rvc-fairseq-base",
+      "report": "compatibility/fairseq20-legacy-qualified.json",
+      "comparisons": 38,
+      "passed": true,
+      "torch": "2.0.0+cu118",
+      "fairseq": "0.12.2",
+      "threads": 4,
+      "attention": "default",
+      "atol": 0.0005,
+      "rtol": 0.0001,
+      "observed_max_abs": 0.0002611875534057617
+    },
+    {
+      "id": "rvc-hubert-base",
+      "report": "compatibility/fairseq24-current-qualified.json",
+      "comparisons": 38,
+      "passed": true,
+      "torch": "2.4.0+cu121",
+      "fairseq": "0.12.2",
+      "threads": 1,
+      "attention": "default",
+      "atol": 0.0005,
+      "rtol": 0.0001,
+      "observed_max_abs": 0.0002561211585998535
+    },
+    {
+      "id": "applio-contentvec",
+      "report": "compatibility/fairseq20-applio-qualified.json",
+      "comparisons": 19,
+      "passed": true,
+      "torch": "2.0.0+cu118",
+      "fairseq": "0.12.2",
+      "threads": 4,
+      "attention": "manual",
+      "atol": 0.0005,
+      "rtol": 0.0001,
+      "observed_max_abs": 0.0002643465995788574
+    }
+  ],
+  "deferred": [
+    "wokada-contentvec",
+    "wokada-japanese-hubert"
+  ],
+  "limitations": [
+    "Feature compatibility only; Windows ML, TensorRT, end-to-end audio quality and latency not qualified.",
+    "Local PyTorch 2.4 CPU multithread reference was invalid; isolated kernel diagnostics and strict failed comparisons retained.",
+    "Extended three-second noise fails the original 1e-4 absolute gate; expanded thresholds are explicit.",
+    "Applio non-ContentVec weights are different representations, not interchangeable with official ContentVec.",
+    "Artifact preparation does not imply redistribution approval; no publication performed."
+  ]
+}

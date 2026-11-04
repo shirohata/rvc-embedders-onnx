@@ -1,0 +1,24 @@
+[
+  {
+    "repository": "RVC-Project/Retrieval-based-Voice-Conversion-WebUI",
+    "revision": "d60cd3d009b7e438f92f8624fa89b710d10c6a39",
+    "path": "infer/modules/train/extract_feature_print.py",
+    "sha256": "5e5514b18f6b4b83d1c2a6e45d793cff8e21dc27cdae98ead77c2163cc08d3ad",
+    "expected_fragments": [
+      "import fairseq",
+      "\"output_layer\": 9 if version == \"v1\" else 12",
+      "normalize=saved_cfg.task.normalize"
+    ]
+  },
+  {
+    "repository": "RVC-Project/Retrieval-based-Voice-Conversion-WebUI",
+    "revision": "81eed5e8f68b6bed1789f682fe78cdd324495afc",
+    "path": "infer/hubert.py",
+    "sha256": "bbfba54d1d83eae3fb634b2909f8f6bf41e6ffe436200ec246867c5c93ebba26",
+    "expected_fragments": [
+      "from transformers import",
+      "outputs.hidden_states[9]",
+      "last_hidden_state"
+    ]
+  }
+]

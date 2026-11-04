@@ -1,0 +1,79 @@
+[
+  {
+    "name": "contentvec-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/auspicious3000/contentvec/d746688a32940f4bee410ed7c87ec9cf8ff04f74/LICENSE",
+    "sha256": "feb87a2e0c305de3464cc44077da5393c52d8ca6362d37427157d04ec6f4510d",
+    "size": 1057
+  },
+  {
+    "name": "contentvec-README.md",
+    "url": "https://raw.githubusercontent.com/auspicious3000/contentvec/d746688a32940f4bee410ed7c87ec9cf8ff04f74/README.md",
+    "sha256": "b037c1f67e73730523d59b3767185bfd8bfa9c455ab157738d7237094517bc49",
+    "size": 2158
+  },
+  {
+    "name": "chinese-hubert-MODEL_CARD.md",
+    "url": "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/fce0375452b1dd6c080ac3248d423d4d037bc831/README.md",
+    "sha256": "971ccb8e419d76ee1facfaefe55e1a112ec3c5cd5a1d4aa192debe51f2ec24f8",
+    "size": 1190
+  },
+  {
+    "name": "korean-hubert-MODEL_CARD.md",
+    "url": "https://huggingface.co/team-lucid/hubert-base-korean/resolve/e4d80ff0b7ae7701be69f2f3375316b1c10c4294/README.md",
+    "sha256": "99b10d32bfb4c493b151e428af19dffe006d1b7711ce2ce644133944c73f81bf",
+    "size": 3464
+  },
+  {
+    "name": "Apache-2.0.txt",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "size": 11358
+  },
+  {
+    "repo": "TencentGameMate/chinese-hubert-base",
+    "revision": "fce0375452b1dd6c080ac3248d423d4d037bc831",
+    "filenames": [
+      ".gitattributes",
+      "README.md",
+      "chinese-hubert-base-fairseq-ckpt.pt",
+      "config.json",
+      "preprocessor_config.json",
+      "pytorch_model.bin"
+    ],
+    "notices": []
+  },
+  {
+    "repo": "team-lucid/hubert-base-korean",
+    "revision": "e4d80ff0b7ae7701be69f2f3375316b1c10c4294",
+    "filenames": [
+      ".gitattributes",
+      "README.md",
+      "config.json",
+      "fairseq_model.pt",
+      "flax_model.msgpack",
+      "model.safetensors",
+      "modeling_flax_hubert.py",
+      "preprocessor_config.json",
+      "pytorch_model.bin"
+    ],
+    "notices": []
+  },
+  {
+    "name": "MIT-permission.txt",
+    "generated_from": "Standard MIT permission and disclaimer text; original MIT model declaration preserved in chinese-hubert-MODEL_CARD.md",
+    "sha256": "508a77d2e7b51d98adeed32648ad124b7b30241a8e70b2e72c99f92d8e5874d1",
+    "size": 1036
+  },
+  {
+    "name": "applio-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/IAHispano/Applio/5379cf261fa7d8085c3b077aa42dabca7c85310b/LICENSE",
+    "sha256": "7823c04ca7103c5e6f20b497ed1f4fcfd08356e7a6766c30121cdafb0823fe44",
+    "size": 1067
+  },
+  {
+    "name": "applio-README.md",
+    "url": "https://raw.githubusercontent.com/IAHispano/Applio/5379cf261fa7d8085c3b077aa42dabca7c85310b/README.md",
+    "sha256": "5f9077e73a11ce298d294c0f002fda5368fc7e7568db8c4ee9412bc7390b7bbc",
+    "size": 5437
+  }
+]

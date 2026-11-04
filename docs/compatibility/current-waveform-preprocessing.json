@@ -1,0 +1,13 @@
+{
+  "url": "https://huggingface.co/lj1995/VoiceConversionWebUI/resolve/e6d0c1a17da07c33557852f9dfa2bd44cc75737d/hubert_base/preprocessor_config.json",
+  "sha256": "7c1976a680fb7acc757cd36fb08eef878fa36c70b4c9d2d595df9c608bbbbf0e",
+  "config": {
+    "do_normalize": false,
+    "feature_extractor_type": "Wav2Vec2FeatureExtractor",
+    "feature_size": 1,
+    "padding_side": "right",
+    "padding_value": 0.0,
+    "return_attention_mask": false,
+    "sampling_rate": 16000
+  }
+}

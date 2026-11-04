@@ -1,0 +1,703 @@
+{
+  "kind": "legacy-fairseq-versus-onnx",
+  "checkpoint_sha256": "f54b40fd2802423a5643779c4861af1e9ee9c1564dc9d32f54f20b5ffba7db96",
+  "onnx_sha256": "63cb176bebcb6c814f23881034333faea4e366f8a63f47c279a3269b13691eb0",
+  "provider": "CPUExecutionProvider",
+  "atol": 0.0001,
+  "rtol": 0.0001,
+  "max_mean_abs": 0.0001,
+  "torch": "2.4.0+cu121",
+  "fairseq": "0.12.2",
+  "python": "3.10.11",
+  "onnxruntime": "1.23.2",
+  "numpy": "1.23.5",
+  "attention": "default",
+  "threads": 1,
+  "passed": false,
+  "cases": [
+    {
+      "case": "silence-800",
+      "output": "unit9",
+      "shape": [
+        1,
+        2,
+        256
+      ],
+      "reference_shape": [
+        1,
+        2,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.7745962142944336e-05,
+      "mean_abs": 7.4632916948758066e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-800",
+      "output": "unit12",
+      "shape": [
+        1,
+        2,
+        768
+      ],
+      "reference_shape": [
+        1,
+        2,
+        768
+      ],
+      "finite": true,
+      "max_abs": 2.0503997802734375e-05,
+      "mean_abs": 3.257642902099178e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-800",
+      "output": "unit9",
+      "shape": [
+        1,
+        2,
+        256
+      ],
+      "reference_shape": [
+        1,
+        2,
+        256
+      ],
+      "finite": true,
+      "max_abs": 1.8358230590820312e-05,
+      "mean_abs": 5.002399120712653e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-800",
+      "output": "unit12",
+      "shape": [
+        1,
+        2,
+        768
+      ],
+      "reference_shape": [
+        1,
+        2,
+        768
+      ],
+      "finite": true,
+      "max_abs": 3.9696693420410156e-05,
+      "mean_abs": 6.2762919696979225e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-800",
+      "output": "unit9",
+      "shape": [
+        1,
+        2,
+        256
+      ],
+      "reference_shape": [
+        1,
+        2,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.7239322662353516e-05,
+      "mean_abs": 6.175623639137484e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-800",
+      "output": "unit12",
+      "shape": [
+        1,
+        2,
+        768
+      ],
+      "reference_shape": [
+        1,
+        2,
+        768
+      ],
+      "finite": true,
+      "max_abs": 7.021427154541016e-05,
+      "mean_abs": 1.1422452189435717e-05,
+      "passed": true
+    },
+    {
+      "case": "silence-1600",
+      "output": "unit9",
+      "shape": [
+        1,
+        4,
+        256
+      ],
+      "reference_shape": [
+        1,
+        4,
+        256
+      ],
+      "finite": true,
+      "max_abs": 3.17990779876709e-05,
+      "mean_abs": 5.76353158976417e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-1600",
+      "output": "unit12",
+      "shape": [
+        1,
+        4,
+        768
+      ],
+      "reference_shape": [
+        1,
+        4,
+        768
+      ],
+      "finite": true,
+      "max_abs": 1.7665326595306396e-05,
+      "mean_abs": 3.277874611740117e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-1600",
+      "output": "unit9",
+      "shape": [
+        1,
+        4,
+        256
+      ],
+      "reference_shape": [
+        1,
+        4,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.086162567138672e-05,
+      "mean_abs": 4.885810085397679e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-1600",
+      "output": "unit12",
+      "shape": [
+        1,
+        4,
+        768
+      ],
+      "reference_shape": [
+        1,
+        4,
+        768
+      ],
+      "finite": true,
+      "max_abs": 8.7738037109375e-05,
+      "mean_abs": 1.730733856675215e-05,
+      "passed": true
+    },
+    {
+      "case": "noise-1600",
+      "output": "unit9",
+      "shape": [
+        1,
+        4,
+        256
+      ],
+      "reference_shape": [
+        1,
+        4,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.3484230041503906e-05,
+      "mean_abs": 6.080264938645996e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-1600",
+      "output": "unit12",
+      "shape": [
+        1,
+        4,
+        768
+      ],
+      "reference_shape": [
+        1,
+        4,
+        768
+      ],
+      "finite": true,
+      "max_abs": 4.38690185546875e-05,
+      "mean_abs": 8.89688544702949e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-3200",
+      "output": "unit9",
+      "shape": [
+        1,
+        9,
+        256
+      ],
+      "reference_shape": [
+        1,
+        9,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.396106719970703e-05,
+      "mean_abs": 5.782962489320198e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-3200",
+      "output": "unit12",
+      "shape": [
+        1,
+        9,
+        768
+      ],
+      "reference_shape": [
+        1,
+        9,
+        768
+      ],
+      "finite": true,
+      "max_abs": 1.3768672943115234e-05,
+      "mean_abs": 3.228460400350741e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-3200",
+      "output": "unit9",
+      "shape": [
+        1,
+        9,
+        256
+      ],
+      "reference_shape": [
+        1,
+        9,
+        256
+      ],
+      "finite": true,
+      "max_abs": 1.9431114196777344e-05,
+      "mean_abs": 4.712043391918996e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-3200",
+      "output": "unit12",
+      "shape": [
+        1,
+        9,
+        768
+      ],
+      "reference_shape": [
+        1,
+        9,
+        768
+      ],
+      "finite": true,
+      "max_abs": 3.936886787414551e-05,
+      "mean_abs": 7.545275821030373e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-3200",
+      "output": "unit9",
+      "shape": [
+        1,
+        9,
+        256
+      ],
+      "reference_shape": [
+        1,
+        9,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.1889805793762207e-05,
+      "mean_abs": 4.822818482352886e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-3200",
+      "output": "unit12",
+      "shape": [
+        1,
+        9,
+        768
+      ],
+      "reference_shape": [
+        1,
+        9,
+        768
+      ],
+      "finite": true,
+      "max_abs": 4.7557055950164795e-05,
+      "mean_abs": 9.257084457203746e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-16000",
+      "output": "unit9",
+      "shape": [
+        1,
+        49,
+        256
+      ],
+      "reference_shape": [
+        1,
+        49,
+        256
+      ],
+      "finite": true,
+      "max_abs": 1.9997358322143555e-05,
+      "mean_abs": 3.269464059485472e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-16000",
+      "output": "unit12",
+      "shape": [
+        1,
+        49,
+        768
+      ],
+      "reference_shape": [
+        1,
+        49,
+        768
+      ],
+      "finite": true,
+      "max_abs": 4.744529724121094e-05,
+      "mean_abs": 3.627662636063178e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-16000",
+      "output": "unit9",
+      "shape": [
+        1,
+        49,
+        256
+      ],
+      "reference_shape": [
+        1,
+        49,
+        256
+      ],
+      "finite": true,
+      "max_abs": 3.933906555175781e-05,
+      "mean_abs": 7.029838343441952e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-16000",
+      "output": "unit12",
+      "shape": [
+        1,
+        49,
+        768
+      ],
+      "reference_shape": [
+        1,
+        49,
+        768
+      ],
+      "finite": true,
+      "max_abs": 3.2067298889160156e-05,
+      "mean_abs": 4.956466909789015e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-16000",
+      "output": "unit9",
+      "shape": [
+        1,
+        49,
+        256
+      ],
+      "reference_shape": [
+        1,
+        49,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.5451183319091797e-05,
+      "mean_abs": 4.369308953755535e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-16000",
+      "output": "unit12",
+      "shape": [
+        1,
+        49,
+        768
+      ],
+      "reference_shape": [
+        1,
+        49,
+        768
+      ],
+      "finite": true,
+      "max_abs": 2.6226043701171875e-05,
+      "mean_abs": 5.3762205425300635e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-24017",
+      "output": "unit9",
+      "shape": [
+        1,
+        74,
+        256
+      ],
+      "reference_shape": [
+        1,
+        74,
+        256
+      ],
+      "finite": true,
+      "max_abs": 3.039836883544922e-05,
+      "mean_abs": 3.28357032230997e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-24017",
+      "output": "unit12",
+      "shape": [
+        1,
+        74,
+        768
+      ],
+      "reference_shape": [
+        1,
+        74,
+        768
+      ],
+      "finite": true,
+      "max_abs": 2.345442771911621e-05,
+      "mean_abs": 2.0336999568826286e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-24017",
+      "output": "unit9",
+      "shape": [
+        1,
+        74,
+        256
+      ],
+      "reference_shape": [
+        1,
+        74,
+        256
+      ],
+      "finite": true,
+      "max_abs": 3.457069396972656e-05,
+      "mean_abs": 6.805072644056054e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-24017",
+      "output": "unit12",
+      "shape": [
+        1,
+        74,
+        768
+      ],
+      "reference_shape": [
+        1,
+        74,
+        768
+      ],
+      "finite": true,
+      "max_abs": 2.8908252716064453e-05,
+      "mean_abs": 5.0386147449899e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-24017",
+      "output": "unit9",
+      "shape": [
+        1,
+        74,
+        256
+      ],
+      "reference_shape": [
+        1,
+        74,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.5480985641479492e-05,
+      "mean_abs": 4.104913841729285e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-24017",
+      "output": "unit12",
+      "shape": [
+        1,
+        74,
+        768
+      ],
+      "reference_shape": [
+        1,
+        74,
+        768
+      ],
+      "finite": true,
+      "max_abs": 2.2083520889282227e-05,
+      "mean_abs": 4.712941517936997e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-48000",
+      "output": "unit9",
+      "shape": [
+        1,
+        149,
+        256
+      ],
+      "reference_shape": [
+        1,
+        149,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.002716064453125e-05,
+      "mean_abs": 3.847912921628449e-06,
+      "passed": true
+    },
+    {
+      "case": "silence-48000",
+      "output": "unit12",
+      "shape": [
+        1,
+        149,
+        768
+      ],
+      "reference_shape": [
+        1,
+        149,
+        768
+      ],
+      "finite": true,
+      "max_abs": 8.815526962280273e-05,
+      "mean_abs": 2.1070370621600887e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-48000",
+      "output": "unit9",
+      "shape": [
+        1,
+        149,
+        256
+      ],
+      "reference_shape": [
+        1,
+        149,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.956390380859375e-05,
+      "mean_abs": 5.339821200323058e-06,
+      "passed": true
+    },
+    {
+      "case": "tone-48000",
+      "output": "unit12",
+      "shape": [
+        1,
+        149,
+        768
+      ],
+      "reference_shape": [
+        1,
+        149,
+        768
+      ],
+      "finite": true,
+      "max_abs": 5.543231964111328e-05,
+      "mean_abs": 2.888243216148112e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-48000",
+      "output": "unit9",
+      "shape": [
+        1,
+        149,
+        256
+      ],
+      "reference_shape": [
+        1,
+        149,
+        256
+      ],
+      "finite": true,
+      "max_abs": 2.6464462280273438e-05,
+      "mean_abs": 4.572037596517475e-06,
+      "passed": true
+    },
+    {
+      "case": "noise-48000",
+      "output": "unit12",
+      "shape": [
+        1,
+        149,
+        768
+      ],
+      "reference_shape": [
+        1,
+        149,
+        768
+      ],
+      "finite": true,
+      "max_abs": 0.0002561211585998535,
+      "mean_abs": 1.0999294318025932e-05,
+      "passed": false
+    },
+    {
+      "case": "wav-0",
+      "output": "unit9",
+      "shape": [
+        1,
+        107,
+        256
+      ],
+      "reference_shape": [
+        1,
+        107,
+        256
+      ],
+      "finite": true,
+      "max_abs": 3.081560134887695e-05,
+      "mean_abs": 2.5913939225574723e-06,
+      "passed": true
+    },
+    {
+      "case": "wav-0",
+      "output": "unit12",
+      "shape": [
+        1,
+        107,
+        768
+      ],
+      "reference_shape": [
+        1,
+        107,
+        768
+      ],
+      "finite": true,
+      "max_abs": 9.070336818695068e-05,
+      "mean_abs": 1.248589001079381e-06,
+      "passed": true
+    }
+  ]
+}

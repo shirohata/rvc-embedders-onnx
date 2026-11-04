@@ -1,0 +1,288 @@
+{
+  "verified_on": "2026-10-20",
+  "version": "0.1.0",
+  "publication_performed": false,
+  "artifact_location": "artifacts/release/v0.1.0/<ID>/model.onnx",
+  "tests_passed": 29,
+  "pytorch_comparisons": 171,
+  "reference_comparisons": 171,
+  "fairseq_comparisons": 95,
+  "models": [
+    {
+      "id": "applio-chinese-hubert-base",
+      "onnx_sha256": "548f6174ad1572be76c7693001df2253fc850b99db572af7b14784da7e3e5d39",
+      "source": {
+        "id": "applio-chinese-hubert-base",
+        "kind": "transformers",
+        "profile": "applio",
+        "cache_id": "chinese-original",
+        "repo": "TencentGameMate/chinese-hubert-base",
+        "revision": "fce0375452b1dd6c080ac3248d423d4d037bc831",
+        "source_revision_scope": "Original publisher model repository revision.",
+        "files": [
+          {
+            "path": "config.json",
+            "sha256": "f6bd1bdef239518d022edcef31243acf344a2afa33d5428e16f221cac09cbcd0",
+            "name": "config.json",
+            "size": 1380,
+            "url": "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/fce0375452b1dd6c080ac3248d423d4d037bc831/config.json"
+          },
+          {
+            "path": "pytorch_model.bin",
+            "sha256": "2fefccd26c2794a583b80f6f7210c721873cb7ebae2c1cde3baf9b27855e24d8",
+            "name": "pytorch_model.bin",
+            "size": 377552987,
+            "url": "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/fce0375452b1dd6c080ac3248d423d4d037bc831/pytorch_model.bin"
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Original publisher model-card license metadata at the pinned revision.",
+        "author_source_rebuild": true
+      },
+      "pytorch_cases": 19,
+      "pytorch_max_abs": 0.0003941059112548828,
+      "pytorch_max_case_mean_abs": 2.3934486307553016e-05,
+      "reference_cases": 19,
+      "reference_max_abs": 0.0,
+      "passed": true
+    },
+    {
+      "id": "applio-contentvec",
+      "onnx_sha256": "a5a586d87601b33299617fd56f1d6e0310ab68c17b37bd88cfae4e2964540331",
+      "source": {
+        "id": "applio-contentvec",
+        "kind": "fairseq",
+        "profile": "applio",
+        "cache_id": "contentvec-original",
+        "repo": "auspicious3000/contentvec",
+        "revision": "d746688a32940f4bee410ed7c87ec9cf8ff04f74",
+        "source_revision_scope": "Author repository revision for license and checkpoint link; checkpoint identity is pinned by SHA-256.",
+        "files": [
+          {
+            "name": "hubert_base.pt",
+            "path": "checkpoint_best_legacy_500.pt",
+            "size": 1330114945,
+            "sha256": "60d936ec5a566776fc392e69ad8b630d14eb588111233fe313436e200a7b187b",
+            "url": "https://ibm.box.com/shared/static/z1wgl1stco8ffooyatzdwsqn2psd9lrr.pt"
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Author repository MIT LICENSE and its official ContentVec_legacy 500 checkpoint link; no separate checkpoint license file supplied.",
+        "author_source_rebuild": true
+      },
+      "pytorch_cases": 19,
+      "pytorch_max_abs": 0.00027447938919067383,
+      "pytorch_max_case_mean_abs": 1.870599044195842e-05,
+      "reference_cases": 19,
+      "reference_max_abs": 0.0,
+      "passed": true,
+      "fairseq_cases": 19,
+      "fairseq_max_abs": 0.0002643465995788574,
+      "fairseq_environment": {
+        "torch": "2.0.0+cu118",
+        "fairseq": "0.12.2",
+        "threads": 4,
+        "attention": "manual",
+        "atol": 0.0005,
+        "rtol": 0.0001
+      }
+    },
+    {
+      "id": "applio-korean-hubert-base",
+      "onnx_sha256": "d3cc737f5b36ef4da64533407c3451486777695fc126810e85c442e30434c2df",
+      "source": {
+        "id": "applio-korean-hubert-base",
+        "kind": "transformers",
+        "profile": "applio",
+        "cache_id": "korean-original",
+        "repo": "team-lucid/hubert-base-korean",
+        "revision": "e4d80ff0b7ae7701be69f2f3375316b1c10c4294",
+        "source_revision_scope": "Original publisher model repository revision.",
+        "files": [
+          {
+            "path": "config.json",
+            "sha256": "24ea67cacbff255e2848b16d655618b49a164539a20cc9dc3339d4319a4259f3",
+            "name": "config.json",
+            "size": 1594,
+            "url": "https://huggingface.co/team-lucid/hubert-base-korean/resolve/e4d80ff0b7ae7701be69f2f3375316b1c10c4294/config.json"
+          },
+          {
+            "path": "pytorch_model.bin",
+            "sha256": "931f6232879f8eadf7dbd9e00e1fa4cac61ad269af89d509b2ed75009b1a02c5",
+            "name": "pytorch_model.bin",
+            "size": 377554841,
+            "url": "https://huggingface.co/team-lucid/hubert-base-korean/resolve/e4d80ff0b7ae7701be69f2f3375316b1c10c4294/pytorch_model.bin"
+          }
+        ],
+        "license": "Apache-2.0",
+        "license_basis": "Original publisher model-card license metadata at the pinned revision.",
+        "author_source_rebuild": true
+      },
+      "pytorch_cases": 19,
+      "pytorch_max_abs": 2.8848648071289062e-05,
+      "pytorch_max_case_mean_abs": 6.036026206857059e-06,
+      "reference_cases": 19,
+      "reference_max_abs": 0.0,
+      "passed": true
+    },
+    {
+      "id": "rvc-fairseq-base",
+      "onnx_sha256": "a4ede7329124ecc4c6ee979f4c1b5a77edc5043f14f29c03ab7576de5d2a89a0",
+      "source": {
+        "id": "rvc-fairseq-base",
+        "kind": "fairseq",
+        "profile": "rvc-fairseq",
+        "cache_id": "contentvec-original",
+        "repo": "auspicious3000/contentvec",
+        "revision": "d746688a32940f4bee410ed7c87ec9cf8ff04f74",
+        "source_revision_scope": "Author repository revision for license and checkpoint link; checkpoint identity is pinned by SHA-256.",
+        "files": [
+          {
+            "name": "hubert_base.pt",
+            "path": "checkpoint_best_legacy_500.pt",
+            "size": 1330114945,
+            "sha256": "60d936ec5a566776fc392e69ad8b630d14eb588111233fe313436e200a7b187b",
+            "url": "https://ibm.box.com/shared/static/z1wgl1stco8ffooyatzdwsqn2psd9lrr.pt"
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Author repository MIT LICENSE and its official ContentVec_legacy 500 checkpoint link; no separate checkpoint license file supplied.",
+        "author_source_rebuild": true
+      },
+      "pytorch_cases": 38,
+      "pytorch_max_abs": 0.00027447938919067383,
+      "pytorch_max_case_mean_abs": 1.870599044195842e-05,
+      "reference_cases": 38,
+      "reference_max_abs": 0.0,
+      "passed": true,
+      "fairseq_cases": 38,
+      "fairseq_max_abs": 0.0002611875534057617,
+      "fairseq_environment": {
+        "torch": "2.0.0+cu118",
+        "fairseq": "0.12.2",
+        "threads": 4,
+        "attention": "default",
+        "atol": 0.0005,
+        "rtol": 0.0001
+      }
+    },
+    {
+      "id": "rvc-hubert-base",
+      "onnx_sha256": "30fe742ecd3d0cd3be6d146c168feac91e4186cc3ef0e44071037f0b5027e743",
+      "source": {
+        "id": "rvc-hubert-base",
+        "kind": "fairseq",
+        "profile": "rvc",
+        "cache_id": "contentvec-original",
+        "repo": "auspicious3000/contentvec",
+        "revision": "d746688a32940f4bee410ed7c87ec9cf8ff04f74",
+        "source_revision_scope": "Author repository revision for license and checkpoint link; checkpoint identity is pinned by SHA-256.",
+        "files": [
+          {
+            "name": "hubert_base.pt",
+            "path": "checkpoint_best_legacy_500.pt",
+            "size": 1330114945,
+            "sha256": "60d936ec5a566776fc392e69ad8b630d14eb588111233fe313436e200a7b187b",
+            "url": "https://ibm.box.com/shared/static/z1wgl1stco8ffooyatzdwsqn2psd9lrr.pt"
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Author repository MIT LICENSE and its official ContentVec_legacy 500 checkpoint link; no separate checkpoint license file supplied.",
+        "author_source_rebuild": true
+      },
+      "pytorch_cases": 38,
+      "pytorch_max_abs": 0.00027447938919067383,
+      "pytorch_max_case_mean_abs": 1.870599044195842e-05,
+      "reference_cases": 38,
+      "reference_max_abs": 0.0,
+      "passed": true,
+      "fairseq_cases": 38,
+      "fairseq_max_abs": 0.0002611875534057617,
+      "fairseq_environment": {
+        "torch": "2.0.0+cu118",
+        "fairseq": "0.12.2",
+        "threads": 4,
+        "attention": "default",
+        "atol": 0.0005,
+        "rtol": 0.0001
+      }
+    },
+    {
+      "id": "applio-spin",
+      "onnx_sha256": "53a8cf0f523a7c073de0943bddc86346e0d677a075719211f3abac624d3ff74e",
+      "source": {
+        "id": "applio-spin",
+        "kind": "transformers",
+        "profile": "applio",
+        "cache_id": "applio-spin-official",
+        "repo": "IAHispano/Applio",
+        "revision": "e908bdd5bf9f18cede26bbbec724b1a4bc7c2f14",
+        "source_revision_scope": "Official Applio model distribution revision; license statement pinned separately.",
+        "files": [
+          {
+            "path": "Resources/embedders/spin/config.json",
+            "sha256": "442f4c090139d059dc8426b8a5ce9f2c637f01c556d5f5ec82d7bc26df342610",
+            "name": "config.json",
+            "size": 1459
+          },
+          {
+            "path": "Resources/embedders/spin/pytorch_model.bin",
+            "sha256": "057f12bfda54e2d486d86a52a3beb2a07c96a888bc6ac0c382c12ac18dbd500c",
+            "name": "pytorch_model.bin",
+            "size": 378356791
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Official Applio README explicitly licenses source code and model weights under MIT, permitting modification, redistribution and commercial use.",
+        "author_source_rebuild": false
+      },
+      "pytorch_cases": 19,
+      "pytorch_max_abs": 3.647804260253906e-05,
+      "pytorch_max_case_mean_abs": 5.9025915106758475e-06,
+      "reference_cases": 19,
+      "reference_max_abs": 0.0,
+      "passed": true
+    },
+    {
+      "id": "applio-spin-v2",
+      "onnx_sha256": "2c4ada40695712f302520127bd5634ebed05fb3334467ebda313955e2f1d43c0",
+      "source": {
+        "id": "applio-spin-v2",
+        "kind": "transformers",
+        "profile": "applio",
+        "cache_id": "applio-spin-v2-official",
+        "repo": "IAHispano/Applio",
+        "revision": "e908bdd5bf9f18cede26bbbec724b1a4bc7c2f14",
+        "source_revision_scope": "Official Applio model distribution revision; license statement pinned separately.",
+        "files": [
+          {
+            "path": "Resources/embedders/spin-v2/config.json",
+            "sha256": "8d3fbf68edffae2afafaa9083002fdb53a8ccc5fe1c0b6af5f0db1bd9f7fad61",
+            "name": "config.json",
+            "size": 1492
+          },
+          {
+            "path": "Resources/embedders/spin-v2/pytorch_model.bin",
+            "sha256": "9a9ac0be326057b17607a988be497793817f8274e987cf691a1b61192510f823",
+            "name": "pytorch_model.bin",
+            "size": 378356791
+          }
+        ],
+        "license": "MIT",
+        "license_basis": "Official Applio README explicitly licenses source code and model weights under MIT, permitting modification, redistribution and commercial use.",
+        "author_source_rebuild": false
+      },
+      "pytorch_cases": 19,
+      "pytorch_max_abs": 4.3004751205444336e-05,
+      "pytorch_max_case_mean_abs": 7.731831829005387e-06,
+      "reference_cases": 19,
+      "reference_max_abs": 0.0,
+      "passed": true
+    }
+  ],
+  "notes": [
+    "All seven exports from pinned original publishers or official Applio distribution matched verified app-derived ONNX outputs with zero observed difference in tested cases.",
+    "CPU FP32 feature validation only; GPU runtimes and end-to-end audio quality/latency unqualified.",
+    "Packaged archive hashes and member verification are recorded separately in artifacts/release-audit/v0.1.0/release-index.json."
+  ]
+}

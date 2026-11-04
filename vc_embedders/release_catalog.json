@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "contentvec-original": {
+      "kind": "fairseq",
+      "repo": "auspicious3000/contentvec",
+      "revision": "d746688a32940f4bee410ed7c87ec9cf8ff04f74",
+      "revision_scope": "Author repository revision for license and checkpoint link; checkpoint identity is pinned by SHA-256.",
+      "publisher": "ContentVec authors / auspicious3000",
+      "license": "MIT",
+      "license_basis": "Author repository MIT LICENSE and its official ContentVec_legacy 500 checkpoint link; no separate checkpoint license file supplied.",
+      "notice": "Original ContentVec license is preserved verbatim, including its supplied incomplete copyright line. This conversion omits training labels and optimizer state.",
+      "license_files": [
+        "contentvec-LICENSE.txt",
+        "contentvec-README.md"
+      ],
+      "files": [
+        {
+          "name": "hubert_base.pt",
+          "path": "checkpoint_best_legacy_500.pt",
+          "size": 1330114945,
+          "sha256": "60d936ec5a566776fc392e69ad8b630d14eb588111233fe313436e200a7b187b",
+          "url": "https://ibm.box.com/shared/static/z1wgl1stco8ffooyatzdwsqn2psd9lrr.pt"
+        }
+      ]
+    },
+    "chinese-original": {
+      "kind": "transformers",
+      "repo": "TencentGameMate/chinese-hubert-base",
+      "revision": "fce0375452b1dd6c080ac3248d423d4d037bc831",
+      "revision_scope": "Original publisher model repository revision.",
+      "publisher": "TencentGameMate",
+      "license": "MIT",
+      "license_basis": "Original publisher model-card license metadata at the pinned revision.",
+      "notice": "The upstream card declares MIT and supplies no separate copyright line or license file. The original card and standard MIT permission text are preserved; no copyright holder is invented.",
+      "license_files": [
+        "MIT-permission.txt",
+        "chinese-hubert-MODEL_CARD.md"
+      ],
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "f6bd1bdef239518d022edcef31243acf344a2afa33d5428e16f221cac09cbcd0",
+          "name": "config.json",
+          "size": 1380,
+          "url": "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/fce0375452b1dd6c080ac3248d423d4d037bc831/config.json"
+        },
+        {
+          "path": "pytorch_model.bin",
+          "sha256": "2fefccd26c2794a583b80f6f7210c721873cb7ebae2c1cde3baf9b27855e24d8",
+          "name": "pytorch_model.bin",
+          "size": 377552987,
+          "url": "https://huggingface.co/TencentGameMate/chinese-hubert-base/resolve/fce0375452b1dd6c080ac3248d423d4d037bc831/pytorch_model.bin"
+        }
+      ]
+    },
+    "korean-original": {
+      "kind": "transformers",
+      "repo": "team-lucid/hubert-base-korean",
+      "revision": "e4d80ff0b7ae7701be69f2f3375316b1c10c4294",
+      "revision_scope": "Original publisher model repository revision.",
+      "publisher": "team-lucid",
+      "license": "Apache-2.0",
+      "license_basis": "Original publisher model-card license metadata at the pinned revision.",
+      "notice": "The original publisher card declares Apache-2.0. No upstream NOTICE file is present in the recorded fixed-revision file inventory. ONNX conversion and output selection are modifications; original publisher attribution is preserved.",
+      "license_files": [
+        "Apache-2.0.txt",
+        "korean-hubert-MODEL_CARD.md"
+      ],
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "24ea67cacbff255e2848b16d655618b49a164539a20cc9dc3339d4319a4259f3",
+          "name": "config.json",
+          "size": 1594,
+          "url": "https://huggingface.co/team-lucid/hubert-base-korean/resolve/e4d80ff0b7ae7701be69f2f3375316b1c10c4294/config.json"
+        },
+        {
+          "path": "pytorch_model.bin",
+          "sha256": "931f6232879f8eadf7dbd9e00e1fa4cac61ad269af89d509b2ed75009b1a02c5",
+          "name": "pytorch_model.bin",
+          "size": 377554841,
+          "url": "https://huggingface.co/team-lucid/hubert-base-korean/resolve/e4d80ff0b7ae7701be69f2f3375316b1c10c4294/pytorch_model.bin"
+        }
+      ]
+    },
+    "applio-spin-official": {
+      "kind": "transformers",
+      "repo": "IAHispano/Applio",
+      "revision": "e908bdd5bf9f18cede26bbbec724b1a4bc7c2f14",
+      "revision_scope": "Official Applio model distribution revision; license statement pinned separately.",
+      "publisher": "Applio / AI Hispano",
+      "license": "MIT",
+      "author_source_rebuild": false,
+      "license_basis": "Official Applio README explicitly licenses source code and model weights under MIT, permitting modification, redistribution and commercial use.",
+      "license_statement_revision": "5379cf261fa7d8085c3b077aa42dabca7c85310b",
+      "license_statement_url": "https://github.com/IAHispano/Applio/blob/5379cf261fa7d8085c3b077aa42dabca7c85310b/README.md#terms-of-use-and-commercial-usage",
+      "notice": "Official Applio distributed weights. Preserve AI Hispano MIT notice. No claim that these weights match a specific original Spin research checkpoint or that Applio trained every underlying model.",
+      "license_files": [
+        "applio-LICENSE.txt",
+        "applio-README.md"
+      ],
+      "files": [
+        {
+          "path": "Resources/embedders/spin/config.json",
+          "sha256": "442f4c090139d059dc8426b8a5ce9f2c637f01c556d5f5ec82d7bc26df342610",
+          "name": "config.json",
+          "size": 1459
+        },
+        {
+          "path": "Resources/embedders/spin/pytorch_model.bin",
+          "sha256": "057f12bfda54e2d486d86a52a3beb2a07c96a888bc6ac0c382c12ac18dbd500c",
+          "name": "pytorch_model.bin",
+          "size": 378356791
+        }
+      ]
+    },
+    "applio-spin-v2-official": {
+      "kind": "transformers",
+      "repo": "IAHispano/Applio",
+      "revision": "e908bdd5bf9f18cede26bbbec724b1a4bc7c2f14",
+      "revision_scope": "Official Applio model distribution revision; license statement pinned separately.",
+      "publisher": "Applio / AI Hispano",
+      "license": "MIT",
+      "author_source_rebuild": false,
+      "license_basis": "Official Applio README explicitly licenses source code and model weights under MIT, permitting modification, redistribution and commercial use.",
+      "license_statement_revision": "5379cf261fa7d8085c3b077aa42dabca7c85310b",
+      "license_statement_url": "https://github.com/IAHispano/Applio/blob/5379cf261fa7d8085c3b077aa42dabca7c85310b/README.md#terms-of-use-and-commercial-usage",
+      "notice": "Official Applio distributed weights. Preserve AI Hispano MIT notice. No claim that these weights match a specific original Spin research checkpoint or that Applio trained every underlying model.",
+      "license_files": [
+        "applio-LICENSE.txt",
+        "applio-README.md"
+      ],
+      "files": [
+        {
+          "path": "Resources/embedders/spin-v2/config.json",
+          "sha256": "8d3fbf68edffae2afafaa9083002fdb53a8ccc5fe1c0b6af5f0db1bd9f7fad61",
+          "name": "config.json",
+          "size": 1492
+        },
+        {
+          "path": "Resources/embedders/spin-v2/pytorch_model.bin",
+          "sha256": "9a9ac0be326057b17607a988be497793817f8274e987cf691a1b61192510f823",
+          "name": "pytorch_model.bin",
+          "size": 378356791
+        }
+      ]
+    }
+  },
+  "models": [
+    {
+      "id": "rvc-fairseq-base",
+      "source": "contentvec-original",
+      "profile": "rvc-fairseq"
+    },
+    {
+      "id": "rvc-hubert-base",
+      "source": "contentvec-original",
+      "profile": "rvc"
+    },
+    {
+      "id": "applio-contentvec",
+      "source": "contentvec-original",
+      "profile": "applio"
+    },
+    {
+      "id": "applio-chinese-hubert-base",
+      "source": "chinese-original",
+      "profile": "applio"
+    },
+    {
+      "id": "applio-korean-hubert-base",
+      "source": "korean-original",
+      "profile": "applio"
+    },
+    {
+      "id": "applio-spin",
+      "source": "applio-spin-official",
+      "profile": "applio"
+    },
+    {
+      "id": "applio-spin-v2",
+      "source": "applio-spin-v2-official",
+      "profile": "applio"
+    }
+  ],
+  "held_models": {
+    "applio-japanese-hubert-base": "Apache-2.0 statement and matching weights confirmed; not yet added to release packaging.",
+    "wokada-contentvec": "Deferred; existing GPL ONNX not included in this release.",
+    "wokada-japanese-hubert": "Deferred; existing GPL ONNX not included in this release."
+  }
+}

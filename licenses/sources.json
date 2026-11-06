@@ -24,6 +24,26 @@
     "size": 3464
   },
   {
+    "name": "japanese-hubert-MODEL_CARD.md",
+    "url": "https://huggingface.co/yky-h/japanese-hubert-base/resolve/9c86c1a3424e8cddca3e59d01c2ed5477e628fcc/README.md",
+    "sha256": "9eade4f3a1e20a07ae0933fd799f65a69b414fbc9d921008fe00fd9a905e5d26",
+    "size": 3630
+  },
+  {
+    "repo": "yky-h/japanese-hubert-base",
+    "revision": "9c86c1a3424e8cddca3e59d01c2ed5477e628fcc",
+    "filenames": [
+      ".gitattributes",
+      "README.md",
+      "config.json",
+      "fairseq/model.pt",
+      "model.safetensors",
+      "preprocessor_config.json",
+      "pytorch_model.bin"
+    ],
+    "notices": []
+  },
+  {
     "name": "Apache-2.0.txt",
     "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
     "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",

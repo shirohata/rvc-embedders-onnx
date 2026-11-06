@@ -1,6 +1,7 @@
 # Embedderの元配布先・同一重み・再配布条件
 
-調査日：2026-10-20。カタログにある10モデルについて、配布元、取得可否、ファイルのSHA-256、
+調査日：2026-10-20。日本語HuBERTの取得元・梱包方針は2026-11-06に更新しました。
+カタログにある10モデルについて、配布元、取得可否、ファイルのSHA-256、
 名前を対応付けたテンソル値、ライセンス表示を照合した記録です。
 以下は固定した資料に基づくパッケージ生成方針であり、配布元の現在の状態や、すべての権利を保証するものではありません。
 
@@ -8,21 +9,22 @@
 
 ## 結果
 
-| ID | 重みの同一性・取得経路の根拠 | 採用する表示 | v0.1.0パッケージの対象 |
+| ID | 重みの同一性・取得経路の根拠 | 採用する表示 | ローカル梱包の対象 |
 | --- | --- | --- | --- |
 | `rvc-fairseq-base` | RVC Transformers版と213/213テンソル一致、作者ContentVecと同値 | 作者リポジトリMIT | 対象。作者のBox重みから再生成 |
 | `rvc-hubert-base` | 作者ContentVecの公式Box重みと213/213テンソル一致 | 作者リポジトリMIT | 対象。作者のBox重みから再生成 |
 | `applio-contentvec` | 同じ作者チェックポイントと213/213テンソル一致 | 作者リポジトリMIT | 対象。作者のBox重みから再生成 |
 | `applio-chinese-hubert-base` | TencentGameMateの元配布ファイルとSHA-256一致 | 元モデルカードMIT | 対象。元配布者から取得 |
 | `applio-korean-hubert-base` | team-lucidの元配布ファイルとSHA-256一致 | 元モデルカードApache-2.0 | 対象。元配布者から取得 |
-| `applio-japanese-hubert-base` | 調査時のrinna公式URLは401。過去のApache表記付きミラーと同じ重みで211/211テンソル一致 | 元モデルApache-2.0の公表・過去ミラーの明記 | 対象外。取得経路と権利表示を添える梱包が必要 |
+| `applio-japanese-hubert-base` | 元開発貢献者yky-hの固定ミラーとApplio版の設定・重みのSHA-256一致 | ミラーのモデルカードが元モデルのApache-2.0と権利保持を明記 | 対象。日本語ZIPはv0.1.1 |
 | `applio-spin` | 作者公開HuBERT 5種と比較し、各115/213一致・98テンソル相違 | Applio公式READMEのモデル重みMIT表明 | 対象。Applio公式重みを使用 |
 | `applio-spin-v2` | 同じ5種と比較し、各83/213一致・130テンソル相違 | 同上 | 対象。Applio公式重みを使用 |
 | `wokada-contentvec` | 配布済みONNXを固定ハッシュで取得 | 配布者のGPL-3.0表示 | 対象外。対応ソースと通知の準備が必要 |
 | `wokada-japanese-hubert` | 配布済みONNXを固定ハッシュで取得 | 配布者のGPL-3.0表示・Apache由来の表示 | 対象外。対応ソースと通知の準備が必要 |
 
-対象7件と保留3件の定義は [release_catalog.json](../vc_embedders/release_catalog.json)、
-その生成物の検証結果は [release-validation-0.1.0.json](release-validation-0.1.0.json) にある。
+ローカル梱包対象8件と保留2件の定義は [release_catalog.json](../vc_embedders/release_catalog.json) にあります。
+2026-10-20の7成果物の検証結果は [release-validation-0.1.0.json](release-validation-0.1.0.json)、
+日本語の2026-11-06の結果は[日本語HuBERTの説明](japanese-hubert_ja.md)にあります。
 同じ元ContentVecでも、RVC用の2出力とApplio用の最終層出力は別の成果物として扱う。
 
 ## 1. RVC／Applio ContentVec：作者の公式配布から取得
@@ -75,7 +77,22 @@ fairseq→Transformersの名前対応後、float32の全要素が `torch.equal` 
 
 固定版にNOTICEがないことは [licenses/sources.json](../licenses/sources.json) のファイル一覧で確認している。
 
-## 3. 日本語：調査時の公式取得状況と過去のApache表記
+## 3. 日本語：元開発貢献者のApacheミラーから取得
+
+2026-11-06に確認した [yky-h/japanese-hubert-base](https://huggingface.co/yky-h/japanese-hubert-base/tree/9c86c1a3424e8cddca3e59d01c2ed5477e628fcc)
+を日本語HuBERTの取得元とします。日本語ZIPはv0.1.1の対象で、v0.1.0には含まれません。
+
+- revision：`9c86c1a3424e8cddca3e59d01c2ed5477e628fcc`。
+- [固定モデルカード](../licenses/japanese-hubert-MODEL_CARD.md)はrinnaの元モデルのミラーであり、
+  Apache-2.0と元著作者の権利を保持すると明記しています。モデル貢献者としてリンクされるYukiya Hono氏のアカウントです。
+- 設定と重みは固定したApplio版とバイト一致します。重みは377,554,841 bytes、
+  SHA-256 `6c023ccb71e4c2b5a324c94fc5ebe12403d3081c5f370df229892419996fd113`。
+- 固定ミラーのファイル一覧にNOTICEはありません。独立した著作権行は創作せず、Apache-2.0全文と
+  モデルカード原文を日本語モデルZIPに同梱し、READMEに元著作者・ミラー・変換内容を記載します。
+- 第12層・768次元の `unit12` のみを出力します。学習済み最終射影は元のTransformers重みに含まれず、
+  `unit9` や `unit12_proj` を生成しません。
+
+### 2026-10-20の調査記録
 
 2026-10-20の調査で `rinna/japanese-hubert-base` のAPIとREADMEは401だった。削除・非公開・認証要件の
 どれが原因かは断定しない。rinnaの[公式発表](https://rinna.co.jp/news/2024/03/20240307.html)は
@@ -89,7 +106,8 @@ HuBERT Baseを含むモデルをApache-2.0と説明している。
 - **調査時のミラーREADMEはGPL-3.0表示も含む**。過去のApache記録と混同せず、
   そのミラーのONNXをApache/MITと読み替えて再配布しない。
 
-v0.1.0のパッケージ対象には含まない。
+この調査に基づく公開済みv0.1.0の7モデルには日本語を含めていません。
+上記の貢献者ミラーを使うローカル梱包とは取得元・検証日を区別します。
 
 ## 4. SPIN／SPIN v2：Applio公式のモデル重みMIT表明を採用
 

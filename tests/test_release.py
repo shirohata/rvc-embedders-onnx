@@ -11,12 +11,12 @@ from vc_embedders.release import (SOURCE_FILES, catalog, inspect_model, inspect_
                                   source_manifest, validate_fairseq, validate_numeric, zip_bytes)
 
 
-def test_release_policy_selects_seven_models_with_pinned_license_provenance():
+def test_release_policy_selects_eight_models_with_pinned_license_provenance():
     data = catalog()
     items = release_items(data)
-    assert len(items) == 7
+    assert len(items) == 8
     assert {item["id"] for item in items}.isdisjoint(data["held_models"])
-    assert len({item["cache_id"] for item in items}) == 5
+    assert len({item["cache_id"] for item in items}) == 6
     for item in items:
         if item["id"] in {"applio-spin", "applio-spin-v2"}:
             source = data["sources"][item["cache_id"]]
@@ -157,7 +157,10 @@ def test_user_documents_include_license_and_readable_use_and_source_information(
         count = 38 if is_rvc else 19
         validation = dict(cases=[1] * count, atol=5e-4, rtol=1e-4, max_mean_abs=1e-4)
         docs = model_documents(item, source, {"validation": validation}, "source.zip")
-        assert set(docs) == {"README.md", "README.ja.md", "LICENSE.txt"}
+        expected = {"README.md", "README.ja.md", "LICENSE.txt"}
+        if source.get("mirror_of"):
+            expected.add("MODEL_CARD.md")
+        assert set(docs) == expected
         license_name = next(name for name in source["license_files"] if name.endswith(".txt"))
         assert docs["LICENSE.txt"] == (release.ROOT / "licenses" / license_name).read_bytes()
         english = docs["README.md"].decode("utf-8")
@@ -217,4 +220,89 @@ def test_incremental_prepare_selection_rejects_unknown_and_keeps_release_contrac
     assert [item["id"] for item in selected] == ["applio-spin", "applio-spin-v2"]
     assert all(comparison_kind(item) == "publisher-rebuild-versus-verified-app-export" for item in selected)
     with pytest.raises(ValueError, match="Unknown release models"):
-        release_items(data, ["applio-japanese-hubert-base"])
+        release_items(data, ["wokada-japanese-hubert"])
+
+
+def test_japanese_mirror_preserves_applio_checkpoint_contract_and_original_notices():
+    from vc_embedders.catalog import read_catalog
+    from vc_embedders.hubert import output_contract
+    from vc_embedders.release import comparison_kind
+    data = catalog()
+    item = release_items(data, ["applio-japanese-hubert-base"])[0]
+    source = data["sources"][item["cache_id"]]
+    app = next(row for row in read_catalog()["models"] if row["id"] == item["id"])
+    assert item["repo"] == "yky-h/japanese-hubert-base"
+    assert source["mirror_of"] == "rinna/japanese-hubert-base"
+    assert source["license"] == "Apache-2.0"
+    assert {f["name"]: (f["sha256"], f["size"]) for f in item["files"]} == {
+        f["name"]: (f["sha256"], f["size"]) for f in app["files"]}
+    assert output_contract(item["profile"]) == [dict(name="unit12", layer=12, projection=False, channels=768)]
+    assert comparison_kind(item) == "author-rebuild-versus-verified-app-export"
+    docs = model_documents(item, source, {"validation": dict(cases=[1] * 19, atol=5e-4,
+                           rtol=1e-4, max_mean_abs=1e-4)}, "source.zip")
+    import vc_embedders.release as release
+    assert docs["MODEL_CARD.md"] == (release.ROOT / "licenses/japanese-hubert-MODEL_CARD.md").read_bytes()
+    assert docs["LICENSE.txt"] == (release.ROOT / "licenses/Apache-2.0.txt").read_bytes()
+    for name in ("README.md", "README.ja.md"):
+        text = docs[name].decode("utf-8")
+        assert "rinna Co., Ltd." in text and "Yukiya Hono" in text
+        assert "MODEL_CARD.md" in text and "Apache-2.0" in text
+        assert "unit9" not in text and "unit12_proj" not in text
+
+
+def test_japanese_model_card_is_required_and_hash_checked(tmp_path, monkeypatch):
+    import vc_embedders.release as release
+    directory = tmp_path / "licenses"
+    directory.mkdir()
+    original = release.ROOT / "licenses"
+    for name in ("sources.json", "Apache-2.0.txt", "japanese-hubert-MODEL_CARD.md"):
+        (directory / name).write_bytes((original / name).read_bytes())
+    source = catalog()["sources"]["japanese-contributor-mirror"]
+    monkeypatch.setattr(release, "ROOT", tmp_path)
+    release.check_licenses({"sources": {"japanese": source}})
+    (directory / "japanese-hubert-MODEL_CARD.md").write_bytes(b"changed attribution")
+    with pytest.raises(ValueError, match="License evidence changed or missing"):
+        release.check_licenses({"sources": {"japanese": source}})
+
+
+def test_selected_package_needs_only_selected_artifacts_and_includes_matching_source(tmp_path, monkeypatch):
+    import shutil
+    from types import SimpleNamespace
+    import onnx
+    import vc_embedders.release as release
+    from vc_embedders.hubert import output_contract
+    data = catalog()
+    item = release_items(data, ["applio-japanese-hubert-base"])[0]
+    root = tmp_path / "root"
+    root.mkdir()
+    source_fixture(root)
+    shutil.copytree(release.ROOT / "licenses", root / "licenses")
+    monkeypatch.setattr(release, "ROOT", root)
+    monkeypatch.setattr(release, "catalog", lambda: data)
+    build = tmp_path / "build"
+    directory = build / item["id"]
+    directory.mkdir(parents=True)
+    model = onnx.helper.make_model(onnx.helper.make_graph([], "contract-fixture", [], []))
+    onnx.save(model, directory / "model.onnx")
+    digest = release.sha256(directory / "model.onnx")
+    report = dict(kind="pytorch-versus-onnx", onnx_sha256=digest, passed=True,
+                  atol=5e-4, rtol=1e-4, max_mean_abs=1e-4, cases=[dict(passed=True)] * 18)
+    release.write_json(directory / "manifest.json", dict(model=item, onnx_sha256=digest,
+                       outputs=output_contract(item["profile"]), validation=report))
+    comparison = dict(report, kind=release.comparison_kind(item), atol=1e-4)
+    release.write_json(directory / "reference-comparison.json", comparison)
+    args = SimpleNamespace(models=[item["id"]], version=release.PROJECT_VERSION, build=build,
+                           output=tmp_path / "dist", audit=tmp_path / "audit", reuse_archives=None)
+    release.package(args)
+    prefix = f"vc-embedders-{release.PROJECT_VERSION}"
+    source_name = prefix + "-source.zip"
+    model_name = prefix + "-" + item["id"] + ".zip"
+    assert {p.name for p in args.output.iterdir()} == {source_name, model_name}
+    index = json.loads((args.audit / "release-index.json").read_text())
+    assert index["selected_models"] == [item["id"]]
+    assert not index["publication_performed"]
+    with zipfile.ZipFile(args.output / model_name) as archive:
+        assert archive.read("model.onnx") == (directory / "model.onnx").read_bytes()
+        assert source_name in archive.read("README.md").decode()
+    with zipfile.ZipFile(args.output / source_name) as archive:
+        assert prefix + "/licenses/japanese-hubert-MODEL_CARD.md" in archive.namelist()

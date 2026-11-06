@@ -7,12 +7,12 @@ RVC・Applio向けのONNX embedderと、固定した元重みの取得・ONNX変
 
 ## ダウンロード
 
-1. [GitHub Releases](https://github.com/shirohata/rvc-embedders-onnx/releases) から、対応する `vc-embedders-0.1.0-<ID>.zip` を取得します。
+1. [GitHub Releases](https://github.com/shirohata/rvc-embedders-onnx/releases) から、下表の版に対応する `vc-embedders-<version>-<ID>.zip` を取得します。
 2. ZIPのSHA-256をGitHubの該当ファイルに表示される値と照合します。PowerShell：`Get-FileHash <ZIPのパス> -Algorithm SHA256`。
 3. ZIPを展開し、vc-rsなど出力名・入出力形状に対応するアプリで `model.onnx` を指定します。配布済みONNXの利用にPython環境の構築は不要です。
 
 モデルZIPには英語・日本語の説明書とモデルライセンスを同梱しています。
-`vc-embedders-0.1.0-source.zip` は変換ツールと検証・出典資料のソースです。
+同じ版の `vc-embedders-<version>-source.zip` はツールと検証・出典資料のソースです。
 
 ## モデルの選び方
 
@@ -21,14 +21,18 @@ RVC・Applio向けのONNX embedderと、固定した元重みの取得・ONNX変
 
 | ID | プロファイル | 出力 | 配布ZIP |
 | --- | --- | --- | --- |
-| `rvc-fairseq-base` | RVC fairseq版 | `unit9`, `unit12` | あり |
-| `rvc-hubert-base` | 固定版のRVC Transformers版 | `unit9`, `unit12` | あり |
-| `applio-contentvec` | Applio ContentVec | `unit12` | あり |
-| `applio-japanese-hubert-base` | Applio 日本語HuBERT | `unit12` | 変換のみ |
-| `applio-chinese-hubert-base` | Applio 中国語HuBERT | `unit12` | あり |
-| `applio-korean-hubert-base` | Applio 韓国語HuBERT | `unit12` | あり |
-| `applio-spin` | Applio SPIN | `unit12` | あり |
-| `applio-spin-v2` | Applio SPIN v2 | `unit12` | あり |
+| `rvc-fairseq-base` | RVC fairseq版 | `unit9`, `unit12` | v0.1.0 |
+| `rvc-hubert-base` | 固定版のRVC Transformers版 | `unit9`, `unit12` | v0.1.0 |
+| `applio-contentvec` | Applio ContentVec | `unit12` | v0.1.0 |
+| `applio-japanese-hubert-base` | Applio 日本語HuBERT | `unit12` | v0.1.1 |
+| `applio-chinese-hubert-base` | Applio 中国語HuBERT | `unit12` | v0.1.0 |
+| `applio-korean-hubert-base` | Applio 韓国語HuBERT | `unit12` | v0.1.0 |
+| `applio-spin` | Applio SPIN | `unit12` | v0.1.0 |
+| `applio-spin-v2` | Applio SPIN v2 | `unit12` | v0.1.0 |
+
+[v0.1.1](https://github.com/shirohata/rvc-embedders-onnx/releases/tag/v0.1.1)の添付は日本語HuBERTと対応ソースZIPの2件です。
+他の7モデルは[v0.1.0](https://github.com/shirohata/rvc-embedders-onnx/releases/tag/v0.1.0)から取得します。
+日本語の出典・CPU検証は[日本語HuBERTの説明](docs/japanese-hubert_ja.md)を参照してください。
 
 `unit9` は第9層＋学習済み射影（256次元、RVC v1）、
 `unit12` は第12層（768次元、RVC v2・Applio標準）です。
@@ -57,7 +61,7 @@ Python Launcherがない場合は `-Python <python-executable>` で指定でき�
 `Check` は依存関係・ソース梱包・ライセンス原文のハッシュ・契約テストを確認します。
 [GitHub Actions](.github/workflows/test.yml) もpush・PR・手動起動時に同じチェックを実行し、モデルの生成・公開は行いません。
 
-`prepare all` は通常カタログの8件を選びます。再配布用の梱包は7プロファイルが対象で、生成元も異なる場合があります。
+`prepare all` は通常カタログの8件を選びます。ローカルの再配布用梱包も8プロファイルが対象で、生成元も異なる場合があります。
 取得と変換を分ける場合は `fetch <ID>` と `export <ID>` を使います。
 ローカル重みは `fetch <ID> --local-dir <directory>` で取り込めます。ローカルでも固定ハッシュとの一致が必要です。
 

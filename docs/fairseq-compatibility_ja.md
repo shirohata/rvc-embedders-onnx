@@ -11,8 +11,9 @@ RVC fairseq版・RVC Transformers版のv1/v2出力、およびApplio ContentVec�
 
 ファイルのSHA-256一致、テンソル値の一致、異なる実装間の出力比較は別の証拠です。
 smoke検査は数値互換の証拠には含めません。重みの対応は[出典調査](redistribution_ja.md)、
-再配布用に別の取得元から生成した7成果物の結果は
+2026-10-20に再配布用の別の取得元から生成した7成果物の結果は
 [release-validation-0.1.0.json](release-validation-0.1.0.json)を参照してください。
+2026-11-06の日本語HuBERT配布候補のCPU比較は[専用の検証要約](japanese-hubert_ja.md)にあります。
 
 ### 独立した実fairseqとの比較
 

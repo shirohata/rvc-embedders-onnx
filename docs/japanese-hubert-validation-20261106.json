@@ -1,0 +1,103 @@
+{
+  "verified_on": "2026-11-06",
+  "publication_performed": false,
+  "model_id": "applio-japanese-hubert-base",
+  "source": {
+    "id": "applio-japanese-hubert-base",
+    "kind": "transformers",
+    "profile": "applio",
+    "cache_id": "japanese-contributor-mirror",
+    "repo": "yky-h/japanese-hubert-base",
+    "revision": "9c86c1a3424e8cddca3e59d01c2ed5477e628fcc",
+    "source_revision_scope": "Original contributor's mirror revision; config and checkpoint are byte-identical to the pinned Applio distribution.",
+    "files": [
+      {
+        "path": "config.json",
+        "name": "config.json",
+        "size": 1375,
+        "sha256": "2cc68fe950504f7468f4e786a31b8bf65c922de2b9f92cd252e3919bed689fe1"
+      },
+      {
+        "path": "pytorch_model.bin",
+        "name": "pytorch_model.bin",
+        "size": 377554841,
+        "sha256": "6c023ccb71e4c2b5a324c94fc5ebe12403d3081c5f370df229892419996fd113"
+      }
+    ],
+    "license": "Apache-2.0",
+    "license_basis": "The contributor mirror's fixed model card explicitly preserves the original model's Apache-2.0 license and original authors' copyrights.",
+    "author_source_rebuild": true
+  },
+  "onnx_sha256": "97754c4452d1e263a9cc4fc4a9c2503bfe5f0892c0290d719084ecfede04e203",
+  "environment": {
+    "os": "Windows x64",
+    "python": "3.12.9",
+    "provider": "CPUExecutionProvider",
+    "threads": 4,
+    "torch": "2.7.1+cpu",
+    "transformers": "4.44.2",
+    "numpy": "2.5.4",
+    "onnx": "1.19.1",
+    "onnxruntime": "1.23.2"
+  },
+  "input": {
+    "sample_rate": 16000,
+    "dtype": "float32",
+    "shape": [
+      1,
+      "samples"
+    ],
+    "normalization": "none"
+  },
+  "outputs": [
+    {
+      "name": "unit12",
+      "layer": 12,
+      "projection": false,
+      "channels": 768
+    }
+  ],
+  "inputs": {
+    "synthetic": [
+      "silence",
+      "220 Hz sine at amplitude 0.15",
+      "normal noise at scale 0.05"
+    ],
+    "synthetic_lengths": [
+      800,
+      1600,
+      3200,
+      16000,
+      24017,
+      48000
+    ],
+    "numpy_rng_seed": 20261020,
+    "local_pcm16_mono_16khz_wav_samples": 34400
+  },
+  "pytorch": {
+    "kind": "pytorch-versus-onnx",
+    "passed": true,
+    "cases": 19,
+    "atol": 0.0005,
+    "rtol": 0.0001,
+    "max_mean_abs_gate": 0.0001,
+    "observed_max_abs": 0.00016868114471435547,
+    "observed_max_case_mean_abs": 8.141366379277315e-06
+  },
+  "reference": {
+    "onnx_sha256": "8a09962ff8b743d887fe8784687f3c340db3310662ebbd8b2c139fd0e577754b",
+    "kind": "author-rebuild-versus-verified-app-export",
+    "passed": true,
+    "cases": 19,
+    "atol": 0.0001,
+    "rtol": 0.0001,
+    "max_mean_abs_gate": 0.0001,
+    "observed_max_abs": 0.0,
+    "observed_max_case_mean_abs": 0.0
+  },
+  "untested": [
+    "Independent fairseq runtime for this Japanese model",
+    "GPU execution",
+    "End-to-end voice conversion quality and latency"
+  ]
+}

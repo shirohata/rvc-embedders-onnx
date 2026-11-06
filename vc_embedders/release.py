@@ -16,6 +16,7 @@ from .catalog import check_sources, fetch, sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PROJECT_VERSION = "0.1.1"
 SOURCE_FILES = ["README.md", "README.ja.md", "AGENTS.md", "LICENSE", "pyproject.toml", "requirements-cpu.lock", ".gitignore", ".gitattributes"]
 SOURCE_TREES = ["vc_embedders", "scripts", "tests", "docs", "licenses", ".github"]
 SOURCE_SUFFIXES = {".py", ".ps1", ".json", ".md", ".txt", ".toml", ".yml", ".yaml", ".lock"}
@@ -213,6 +214,7 @@ def model_documents(item, source, manifest, source_archive):
         "rvc-fairseq-base": ("ContentVec for RVC fairseq", "RVC fairseq版向け ContentVec"),
         "rvc-hubert-base": ("ContentVec for RVC Transformers", "RVC Transformers版向け ContentVec"),
         "applio-contentvec": ("ContentVec for Applio", "Applio向け ContentVec"),
+        "applio-japanese-hubert-base": ("Japanese HuBERT for Applio", "Applio向け 日本語HuBERT"),
         "applio-chinese-hubert-base": ("Chinese HuBERT for Applio", "Applio向け 中国語HuBERT"),
         "applio-korean-hubert-base": ("Korean HuBERT for Applio", "Applio向け 韓国語HuBERT"),
         "applio-spin": ("SPIN for Applio", "Applio向け SPIN"),
@@ -238,6 +240,22 @@ def model_documents(item, source, manifest, source_archive):
                     "no separate checkpoint license was supplied. The incomplete upstream copyright line is preserved.")
         basis_ja = ("作者リポジトリのMITと、そこから案内された学習済み重みに基づきます。"
                     "重み個別の許諾文はなく、原文の不完全な著作権行もそのまま保持しています。")
+    elif source.get("mirror_of"):
+        origin = f"https://huggingface.co/{source['repo']}/blob/{source['revision']}/README.md"
+        original = f"https://huggingface.co/{source['mirror_of']}"
+        basis_en = (f"Weights are obtained from the [original contributor's mirror]({origin}) of "
+                    f"[{source['mirror_of']}]({original}). Its model card explicitly preserves Apache-2.0 "
+                    "and all original authors' copyrights; the original model was trained by rinna Co., Ltd. "
+                    "No separate copyright line or NOTICE file is supplied at this fixed mirror revision. "
+                    "The original mirror model card is included as `MODEL_CARD.md`. "
+                    "The config and checkpoint SHA-256 match the pinned Applio Japanese HuBERT files. "
+                    "Only layer 12 without final projection is exported; no existing upstream ONNX is reused.")
+        basis_ja = (f"[{source['mirror_of']}]({original}) の[元開発貢献者によるミラー]({origin})から取得しています。"
+                    "モデルカードはApache-2.0と元著作者の権利保持を明記し、元モデルの学習者はrinna Co., Ltd.です。"
+                    "固定したミラーには独立した著作権行やNOTICEファイルがなく、これらを創作しません。"
+                    "ミラーのモデルカード原文を `MODEL_CARD.md` に同梱しています。"
+                    "設定と重みのSHA-256は固定したApplio日本語HuBERTと一致します。"
+                    "最終射影なしの第12層だけを出力し、上流の既存ONNXは流用していません。")
     elif source.get("license_statement_url"):
         origin = source["license_statement_url"]
         weights = f"https://huggingface.co/{source['repo']}/tree/{source['revision']}"
@@ -291,7 +309,7 @@ PyTorch versus ONNX Runtime CPU: {len(validation['cases'])} comparisons passed (
 Comparison with the verified app-distributed-weight export also passed. Results apply only to the tested features, inputs and tolerances.
 GPU execution and end-to-end audio quality/latency have not been validated.
 
-Converted with vc-embedders 0.1.0. Source: `{source_archive}` from the same distribution.
+Packaged with vc-embedders {PROJECT_VERSION}. Source: `{source_archive}` from the same distribution.
 See `docs/fairseq-compatibility_ja.md` inside the source ZIP for validation evidence and `docs/releasing_ja.md` for reproduction steps (Japanese).
 """
     readme_ja = f"""# {label_ja}
@@ -325,12 +343,15 @@ PyTorch対ONNX Runtime CPUの{len(validation['cases'])}比較はすべて合格�
 検証済みのアプリ配布版重みから生成したONNXとの比較も合格しています。結果は検査した特徴量・入力・許容誤差の範囲に限ります。
 GPU実行と、音声変換全体の音質・遅延は未検証です。
 
-変換ツールは vc-embedders 0.1.0。同じ配布先の `{source_archive}` にソースがあります。
+梱包ツールは vc-embedders {PROJECT_VERSION}。同じ配布先の `{source_archive}` にソースがあります。
 検証根拠はソースZIP内の `docs/fairseq-compatibility_ja.md`、再現手順は `docs/releasing_ja.md` を参照してください。
 """
     license_name = next(name for name in source["license_files"] if name.endswith(".txt"))
-    return {"README.md": readme_en.encode("utf-8"), "README.ja.md": readme_ja.encode("utf-8"),
-            "LICENSE.txt": (ROOT / "licenses" / license_name).read_bytes()}
+    documents = {"README.md": readme_en.encode("utf-8"), "README.ja.md": readme_ja.encode("utf-8"),
+                 "LICENSE.txt": (ROOT / "licenses" / license_name).read_bytes()}
+    if source.get("mirror_of"):
+        documents["MODEL_CARD.md"] = (ROOT / "licenses/japanese-hubert-MODEL_CARD.md").read_bytes()
+    return documents
 
 
 def model_archive(path, contents, model_path, reuse=None, seven_zip=None):
@@ -382,9 +403,9 @@ def package(args):
         raise ValueError("Release output already exists; use a new directory")
     if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?", args.version):
         raise ValueError("Invalid release version")
-    if args.version != "0.1.0":
-        raise ValueError("Version must match the current project version 0.1.0")
-    items = release_items(data)
+    if args.version != PROJECT_VERSION:
+        raise ValueError(f"Version must match the current project version {PROJECT_VERSION}")
+    items = release_items(data, args.models)
     checked = []
     for item in items:
         directory = args.build / item["id"]
@@ -455,6 +476,7 @@ def package(args):
                            onnx_sha256=digest, members=expected))
         print(f"Packaged and verified: {name}", flush=True)
     index = dict(schema_version=1, version=args.version, publication_performed=False,
+                 selected_models=[item["id"] for item in items],
                  source_fingerprint=snapshot["fingerprint_sha256"], assets=assets,
                  held_models=data["held_models"], archive_member_hashes_verified=True)
     write_json(args.audit / "release-index.json", index)
@@ -465,20 +487,18 @@ def package(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["prepare", "package"])
-    parser.add_argument("--models", nargs="+", help="Prepare only selected release model IDs; existing artifacts are never overwritten")
-    parser.add_argument("--version", default="0.1.0")
+    parser.add_argument("--models", nargs="+", help="Prepare or package only selected release model IDs; omitted means all models")
+    parser.add_argument("--version", default=PROJECT_VERSION)
     parser.add_argument("--cache", type=Path, default=Path("cache/release"))
     parser.add_argument("--build", type=Path, default=Path("artifacts/release/v0.1.0"))
-    parser.add_argument("--output", type=Path, default=Path("dist/v0.1.0"))
+    parser.add_argument("--output", type=Path, default=Path(f"dist/v{PROJECT_VERSION}"))
     parser.add_argument("--references", type=Path, default=Path("artifacts"))
-    parser.add_argument("--audit", type=Path, default=Path("artifacts/release-audit/v0.1.0"))
+    parser.add_argument("--audit", type=Path, default=Path(f"artifacts/release-audit/v{PROJECT_VERSION}"))
     parser.add_argument("--reuse-archives", type=Path, help="Reuse unchanged compressed models from existing ZIPs; requires 7-Zip")
     parser.add_argument("--lengths", nargs="+", type=int, default=[800, 1600, 3200, 16000, 24017, 48000])
     parser.add_argument("--wav", type=Path, action="append", default=[])
     parser.add_argument("--threads", type=int, default=4)
     args = parser.parse_args()
-    if args.models and args.command != "prepare":
-        parser.error("--models is only valid for prepare; package always includes the full release catalog")
     if args.threads < 1 or min(args.lengths) < 800:
         parser.error("Threads must be positive and lengths >= 800")
     if args.command == "prepare":

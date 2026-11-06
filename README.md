@@ -7,12 +7,12 @@ export ONNX, and verify feature tensors. Model files are distributed as Release 
 
 ## Download
 
-1. Open [GitHub Releases](https://github.com/shirohata/rvc-embedders-onnx/releases) and download `vc-embedders-0.1.0-<ID>.zip` for your model.
+1. Open [GitHub Releases](https://github.com/shirohata/rvc-embedders-onnx/releases) and download `vc-embedders-<version>-<ID>.zip` for your model, using the version in the table below.
 2. Compare its SHA-256 with the digest shown beside the asset. PowerShell: `Get-FileHash <path-to-ZIP> -Algorithm SHA256`.
 3. Extract the ZIP and select `model.onnx` in an app that supports its output names and shapes, such as vc-rs. No Python setup is needed to use the prebuilt file.
 
 Each model ZIP includes English/Japanese instructions and its model license.
-`vc-embedders-0.1.0-source.zip` contains the conversion tool and supporting evidence.
+The matching `vc-embedders-<version>-source.zip` contains the tool and supporting evidence.
 
 ## Choose a model
 
@@ -21,14 +21,18 @@ Equal output dimensions do not make different embedders interchangeable.
 
 | ID | Profile | Outputs | Release ZIP |
 | --- | --- | --- | --- |
-| `rvc-fairseq-base` | fairseq-based RVC | `unit9`, `unit12` | Yes |
-| `rvc-hubert-base` | Pinned Transformers-based RVC | `unit9`, `unit12` | Yes |
-| `applio-contentvec` | Applio ContentVec | `unit12` | Yes |
-| `applio-japanese-hubert-base` | Applio Japanese HuBERT | `unit12` | Export only |
-| `applio-chinese-hubert-base` | Applio Chinese HuBERT | `unit12` | Yes |
-| `applio-korean-hubert-base` | Applio Korean HuBERT | `unit12` | Yes |
-| `applio-spin` | Applio SPIN | `unit12` | Yes |
-| `applio-spin-v2` | Applio SPIN v2 | `unit12` | Yes |
+| `rvc-fairseq-base` | fairseq-based RVC | `unit9`, `unit12` | v0.1.0 |
+| `rvc-hubert-base` | Pinned Transformers-based RVC | `unit9`, `unit12` | v0.1.0 |
+| `applio-contentvec` | Applio ContentVec | `unit12` | v0.1.0 |
+| `applio-japanese-hubert-base` | Applio Japanese HuBERT | `unit12` | v0.1.1 |
+| `applio-chinese-hubert-base` | Applio Chinese HuBERT | `unit12` | v0.1.0 |
+| `applio-korean-hubert-base` | Applio Korean HuBERT | `unit12` | v0.1.0 |
+| `applio-spin` | Applio SPIN | `unit12` | v0.1.0 |
+| `applio-spin-v2` | Applio SPIN v2 | `unit12` | v0.1.0 |
+
+The [v0.1.1 release](https://github.com/shirohata/rvc-embedders-onnx/releases/tag/v0.1.1) contains Japanese HuBERT and its matching source ZIP.
+The other seven model ZIPs remain in [v0.1.0](https://github.com/shirohata/rvc-embedders-onnx/releases/tag/v0.1.0).
+See the [Japanese HuBERT notes](docs/japanese-hubert_ja.md) for its source and CPU verification.
 
 `unit9` is layer 9 plus the trained projection (256 channels, RVC v1).
 `unit12` is layer 12 (768 channels, RVC v2 / Applio default).
@@ -58,7 +62,7 @@ package versions, not wheel hashes or the OS. `Check` runs dependency, source-pa
 license-hash, and contract checks. [GitHub Actions](.github/workflows/test.yml) runs the same
 checks on pushes, pull requests, and manual runs; it does not generate or publish model packages.
 
-`prepare all` selects all eight catalog models; release packaging uses seven profiles
+`prepare all` selects all eight catalog models; local release packaging uses eight profiles
 and can use different weight sources. To separate download and export, use `fetch <ID>`
 and `export <ID>`. Import local weights with `fetch <ID> --local-dir <directory>`;
 local files must also match the pinned hashes.

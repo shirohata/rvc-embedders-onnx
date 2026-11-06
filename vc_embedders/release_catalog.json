@@ -84,6 +84,35 @@
         }
       ]
     },
+    "japanese-contributor-mirror": {
+      "kind": "transformers",
+      "repo": "yky-h/japanese-hubert-base",
+      "revision": "9c86c1a3424e8cddca3e59d01c2ed5477e628fcc",
+      "revision_scope": "Original contributor's mirror revision; config and checkpoint are byte-identical to the pinned Applio distribution.",
+      "publisher": "rinna Co., Ltd. (original); Yukiya Hono / yky-h (contributor mirror)",
+      "license": "Apache-2.0",
+      "mirror_of": "rinna/japanese-hubert-base",
+      "license_basis": "The contributor mirror's fixed model card explicitly preserves the original model's Apache-2.0 license and original authors' copyrights.",
+      "notice": "Original model attribution and the mirror card are preserved. No NOTICE file or separate copyright line is supplied at the fixed mirror revision. ONNX conversion and selection of layer 12 without final projection are modifications. No upstream ONNX is reused or relicensed.",
+      "license_files": [
+        "Apache-2.0.txt",
+        "japanese-hubert-MODEL_CARD.md"
+      ],
+      "files": [
+        {
+          "path": "config.json",
+          "name": "config.json",
+          "size": 1375,
+          "sha256": "2cc68fe950504f7468f4e786a31b8bf65c922de2b9f92cd252e3919bed689fe1"
+        },
+        {
+          "path": "pytorch_model.bin",
+          "name": "pytorch_model.bin",
+          "size": 377554841,
+          "sha256": "6c023ccb71e4c2b5a324c94fc5ebe12403d3081c5f370df229892419996fd113"
+        }
+      ]
+    },
     "applio-spin-official": {
       "kind": "transformers",
       "repo": "IAHispano/Applio",
@@ -169,6 +198,11 @@
       "profile": "applio"
     },
     {
+      "id": "applio-japanese-hubert-base",
+      "source": "japanese-contributor-mirror",
+      "profile": "applio"
+    },
+    {
       "id": "applio-korean-hubert-base",
       "source": "korean-original",
       "profile": "applio"
@@ -185,7 +219,6 @@
     }
   ],
   "held_models": {
-    "applio-japanese-hubert-base": "Apache-2.0 statement and matching weights confirmed; not yet added to release packaging.",
     "wokada-contentvec": "Deferred; existing GPL ONNX not included in this release.",
     "wokada-japanese-hubert": "Deferred; existing GPL ONNX not included in this release."
   }

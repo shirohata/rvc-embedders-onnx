@@ -7,21 +7,24 @@
 
 ## 対象と配布物
 
-v0.1.0の対象は次の7件です。定義と保留理由は
-[release_catalog.json](../vc_embedders/release_catalog.json)、保存済みの数値検証結果は
-[release-validation-0.1.0.json](release-validation-0.1.0.json)で確認できます。
+v0.1.1の添付は日本語HuBERTと対応ソースZIPの2件です。他の7モデルはv0.1.0を使います。
+梱包可能なカタログは次の8件で、`--models` によって必要なモデルだけを選べます。
+定義と保留理由は [release_catalog.json](../vc_embedders/release_catalog.json)、2026-10-20の7成果物の結果は
+[release-validation-0.1.0.json](release-validation-0.1.0.json)、2026-11-06の日本語の結果は
+[日本語HuBERTの説明](japanese-hubert_ja.md)で確認できます。
 
 | モデルID | 生成元 |
 | --- | --- |
 | `rvc-fairseq-base` / `rvc-hubert-base` / `applio-contentvec` | 作者ContentVecのBox重み |
 | `applio-chinese-hubert-base` | TencentGameMateのHugging Face重み |
 | `applio-korean-hubert-base` | team-lucidのHugging Face重み |
+| `applio-japanese-hubert-base` | 元開発貢献者yky-hのApache-2.0ミラー（固定Applio版とバイト一致） |
 | `applio-spin` / `applio-spin-v2` | Applio公式の固定重み |
 
-日本語HuBERTとw-okadaの既存ONNXは対象外です。ContentVecの3件は同じ作者重みを共有しますが、
+w-okadaの既存ONNXは対象外です。ContentVecの3件は同じ作者重みを共有しますが、
 アプリ向けの抽出プロファイルを個別に記録します。
 
-モデルZIPのファイル名は `vc-embedders-0.1.0-<ID>.zip` です。
+モデルZIPのファイル名は `vc-embedders-<version>-<ID>.zip` です。
 
 | モデルZIPの中身 | 内容 |
 | --- | --- |
@@ -29,8 +32,11 @@ v0.1.0の対象は次の7件です。定義と保留理由は
 | `README.md` | 英語の説明書：使い方、入出力、出典・変更内容、検証範囲 |
 | `README.ja.md` | 日本語の説明書（英語版と同じ内容） |
 | `LICENSE.txt` | 適用するモデルライセンスの許諾本文 |
+| `MODEL_CARD.md` | 日本語モデルに同梱する、元著作者・ミラーのApache-2.0条件を保持したカード原文 |
 
-別に開発者向け `vc-embedders-0.1.0-source.zip` を生成します。配布物は合計8 ZIPです。
+別に開発者向け `vc-embedders-0.1.1-source.zip` を生成します。
+`package --models applio-japanese-hubert-base` では合計2 ZIP、`--models` なしでは合計9 ZIPです。
+公開済みv0.1.0の添付ファイルは変更しません。
 ソースZIPはプログラム・カタログ・テスト・本ドキュメント・検証集計・必要な上流原文を含みます。
 出典・変更内容は各言語のREADMEに統合し、独自のNOTICEやJSONの生成・検証記録は同梱しません。
 
@@ -44,9 +50,9 @@ v0.1.0の対象は次の7件です。定義と保留理由は
 | --- | --- |
 | `cache/release/` | 固定revision・SHA-256・サイズを照合した元重み |
 | `artifacts/<ID>/` | 通常変換で作る比較参照ONNX |
-| `artifacts/release/v0.1.0/<ID>/` | 再配布用ONNX、manifest、比較結果 |
-| `artifacts/release-audit/v0.1.0/` | 詳細な生成記録、ソース一覧、ZIP・メンバーハッシュ |
-| `dist/v0.1.0/` | モデルZIP 7件、ソースZIP 1件 |
+| `artifacts/release/v0.1.0/<ID>/` | 再配布用ONNX、manifest、比較結果（v0.1.1でも検証済みONNXを再利用） |
+| `artifacts/release-audit/v0.1.1/` | 梱包記録、選択モデル、ソース一覧、ZIP・メンバーハッシュ |
+| `dist/v0.1.1/` | 選択したモデルZIPとソースZIP |
 
 これらの生成先はGit対象外です。監査先の `release-index.json`・`source-manifest.json` で、
 生成したZIPとソースの一覧・ハッシュを確認できます。
@@ -58,10 +64,10 @@ v0.1.0の対象は次の7件です。定義と保留理由は
 [READMEのセットアップ](../README.ja.md#セットアップ)に従い、Python 3.12の専用環境を用意します。
 コマンドはリポジトリルートのPowerShellで実行します。
 
-通常カタログから7件の比較参照を生成します。
+日本語だけを再生成する場合は、通常カタログからその比較参照を生成します。
 
 ```powershell
-.\.venv\Scripts\python.exe -m vc_embedders prepare rvc-fairseq-base rvc-hubert-base applio-contentvec applio-chinese-hubert-base applio-korean-hubert-base applio-spin applio-spin-v2
+.\.venv\Scripts\python.exe -m vc_embedders prepare applio-japanese-hubert-base
 ```
 
 ### 2. 再配布用ONNXを生成する
@@ -71,16 +77,18 @@ v0.1.0の対象は次の7件です。定義と保留理由は
 
 ```powershell
 $validationWav = "sample.wav"
-.\.venv\Scripts\python.exe scripts/build_release.py prepare --wav $validationWav
+.\.venv\Scripts\python.exe scripts/build_release.py prepare --models applio-japanese-hubert-base --wav $validationWav
 ```
 
 カタログの固定した元重みを取得・照合し、ONNX変換、PyTorch参照計算との比較、
 通常変換のONNXとの比較を行います。既存成果物は上書きしません。
 未生成のモデルだけ処理する場合は、例えば `prepare --models applio-spin applio-spin-v2 --wav $validationWav`
-のように指定できます。`package` は常に7件すべての検証済み成果物を必要とします。
+のように指定できます。`package --models <ID>` は指定したモデルの検証済み成果物だけを必要とし、
+対応ソースZIPも生成します。`--models` を省略した場合は全8件の成果物が必要です。
 
 ### 3. ContentVecの3成果物を実fairseqと比較する
 
+この節はContentVecを梱包する場合だけ必要です。日本語HuBERTのみの梱包には使いません。
 通常変換とは別の、fairseq 0.12.2が動くPythonを `$fairseqPython` に指定します。
 保存済みの再配布用比較はPython 3.9.13 / PyTorch 2.0.0+cu118の4スレッドで実施しました。
 CPUで比較し、[互換性調査](fairseq-compatibility_ja.md#検証環境で観測したcpu数値異常)にある
@@ -99,7 +107,7 @@ CPUで比較し、[互換性調査](fairseq-compatibility_ja.md#検証環境で�
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe scripts/build_release.py package
+.\.venv\Scripts\python.exe scripts/build_release.py package --models applio-japanese-hubert-base
 ```
 
 梱包処理は次を確認します。
@@ -125,21 +133,21 @@ CPUで比較し、[互換性調査](fairseq-compatibility_ja.md#検証環境で�
 モデルを再変換する必要がなければ、検証済みのビルド先をそのまま使えます。
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/build_release.py package --output dist/v0.1.0-docs --audit artifacts/release-audit/v0.1.0-docs
+.\.venv\Scripts\python.exe scripts/build_release.py package --models applio-japanese-hubert-base --output dist/v0.1.1-docs --audit artifacts/release-audit/v0.1.1-docs
 ```
 
 上の出力先・監査先も未作成である必要があります。
-圧縮済みモデルを再利用する場合は、さらに `--reuse-archives dist/v0.1.0` を指定します。
+同じ版の圧縮済みモデルを再利用する場合は、さらに `--reuse-archives dist/v0.1.1` を指定します。
 この場合だけ7-Zipが必要で、検証済みモデルの圧縮データを再利用します。新しいZIPの全メンバーを再照合し、元のZIPは変更しません。
 
 ## GitHub Releaseへの公開
 
 1. `./scripts/dev.ps1 -Task Check` を実行し、梱包した `source-manifest.json` の一覧・ハッシュが確定コミットと一致することを確認します。未追跡ファイルも梱包対象になるため、Gitの状態だけでは確認できません。
-2. 確定コミットをpushし、同じコミットのタグでRelease下書きを作成します。8 ZIPを添付し、GitHubが示す各assetのSHA-256（APIの `digest`）を監査用 `release-index.json` と照合します。
-3. リリースノート・タグ・全添付ファイルを確認して公開します。公開後は別ディレクトリに8 ZIPを再取得し、SHA-256を再照合します。不一致なら配布を止めて原因を確認します。
+2. 確定コミットをpushして同じコミットのタグでRelease下書きを作成します。v0.1.1では日本語モデルとソースの2 ZIPを添付し、GitHubが示す各assetのSHA-256（APIの `digest`）を監査用 `release-index.json` と照合します。
+3. リリースノート・タグ・全添付ファイルを確認して公開します。公開後は別ディレクトリに2 ZIPを再取得し、SHA-256を再照合します。不一致なら配布を止めて原因を確認します。
 
 通常CIはチェックのみで、梱包・公開は行いません。コミット・push・タグ・アップロード・公開は、依頼で明示された範囲で実行します。
 モデルはRelease assets、検証要約と出典はGit、キャッシュ・音声・詳細監査資料はGit対象外に置きます。
 
-梱包コードはv0.1.0用です。次版では `pyproject.toml`、`release.py` のバージョン検査・既定値・保存先と文書を更新します。
+梱包コードはv0.1.1用です。次版では `pyproject.toml`、`release.py` の `PROJECT_VERSION` と文書を更新します。
 ONNXを再生成した場合は、そのハッシュに対応する検証記録を作成し、過去版の結果で代用しません。
